@@ -8,8 +8,8 @@ const closeModal = () => document.getElementById('modal')
 
 
 const tempClient = {
-    nome: "frank",
-    email: "frankdias@gmail.com",
+    nome: "samuca",
+    email: "samucadias@gmail.com",
     celular: "16991558344",
     cidade: "Passos"
 }
@@ -18,6 +18,12 @@ const getLocalStorage = () => JSON.parse(localStorage.getItem('db_client')) ?? [
 const setLocalStorage = (dbClient) => localStorage.setItem("db_client", JSON.stringify(dbClient));
 
 // Crud - Cread Read Update Delete
+
+const updateClient = (index, client) => {
+    const dbClient = readClient()
+    dbClient[index] = client
+    setLocalStorage(dbClient)
+}
 
 const readClient = () => getLocalStorage()
 
