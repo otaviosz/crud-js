@@ -3,8 +3,10 @@
 const openModal = () => document.getElementById('modal')
     .classList.add('active')
 
-const closeModal = () => document.getElementById('modal')
-    .classList.remove('active')
+const closeModal = () => {
+    clearFields()
+    document.getElementById('modal').classList.remove('active')
+} 
 
 
 const tempClient = {
@@ -39,9 +41,36 @@ const createClient = (client) => {
     setLocalStorage(dbClient)
 }
 
+const isValidFields = () => {
+    return document.getElementById('form').reportValidity()
+}
+
+// Iteração com Layout
+
+const clearFields = () => {
+    const fields = document.querySelectorAll('.modal-field')
+    fields.forEach((field) => field.value = '')
+}
+
+const saveClient = () => {
+    if (isValidFields()){
+        const client = {
+            nome: document.getElementById('nome').value,
+            email: document.getElementById('email').value,
+            celular: document.getElementById('celular').value,
+            cidade: document.getElementById('cidade').value
+        }
+        createClient(client)
+        closeModal()
+    }
+}
+
+
 // Eventos
 document.getElementById('cadastrarCliente')
     .addEventListener('click', openModal)
 
 document.getElementById('modalClose')
     .addEventListener('click', closeModal)
+
+document.getElementById('salvar').addEventListener('click', saveClient)
